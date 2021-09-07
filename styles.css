@@ -22,10 +22,20 @@ body {
   background-color: #222;
 }
 
+h2 {
+  font-size: 14px;
+  font-weight: bold;
+}
+
 a {
   color: #37a;
 }
 
 a:visited {
   color: #758
+}
+
+.important {
+  font-weight: bold;
+  margin-top: 20px;
 }

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ohm</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="-105 -105 210 210"><path fill="#CCC" stroke="#CCC" stroke-width="10" stroke-linecap="square" d="M-67.5-37.5h0v75h15v-75h-15m30-30h0v105h15v-105h-15m30 30h15v75h-15v-75m30 0h15v105h-15v-105m30 0h15v75h-15v-75m-60-30h75v15h-75v-15m-60 120h75v15h-75v-15m120 0h0v15h15v-15h-15m-120-120h0v15h15v-15h-15"/></svg>
+  <h2>## general</h2>
+  <p>By default, ohm opens without devtools displayed. If you'd like to get a closer look into the live logs and error debugging it is recommended to open the devtools when running ohm. You can open the devtools manually by using the keyboard shortcut Cmd+Option+I/Ctrl+Shift+I or through the menu bar. You can also set devtools to open automatically on launch by modifying settings. [see below]</p>
+  <h2>## uploading</h2>
+  <p>All songs must be uploaded to ohm as an mp3 file. This restriction is put in place to improve the user experience as streaming a lossless file can lead to buffering and large amounts of bandwidth usage. If the artist wants to include a lossless version of the song, they can do so freely by including a lossless copy in the files section of the song.</p>
+  <p>When uploading more than one song at the same time, the upload is recognized by ohm as an album. In this case the album title, tags and description input fields are enabled and must be provided. Albums can be distinguished from songs by the <svg height="11" viewBox="-100 -100 200 200" width="11" xmlns="http://www.w3.org/2000/svg" transform="translate(0,1)"><g fill="none"><path d="m-75 75h105v-120h-90c-8.285 0-15 6.716-15 15zm150-150h-90c-8.285 0-15 6.716-15 15v15m60 90h45v-120" stroke="#eee" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/></g></svg> icon next to the title.</p>
+  <p>Files that an artist includes with a song can be of three different types:</p>
+  <p>original - an original file with no previous copyright owners, e.g. original sounds, stems, project files, etc. All filetypes are allowed. </p>
+  <p>internal - a reference to a file already uploaded to ohm in a different song. An internal file can be referenced by its id.</p>
+  <p>external - an unoriginal file with a CC license. Attribution must be provided as required by the license holder.</p>
+  <h2>## pinning</h2>
+  <p>By pinning a song, you are making a local copy of the song and all of its included files in your ipfs repository. This means that your client is now sharing this data with the rest of the network.</p>
+  <p>When you pin a song, you are not downloading it in a traditional sense. No listenable files are downloaded to your disk, ifps only stores the data in packets that it can then share across the network with other nodes.</p>
+  <p>You cannot pin individual files that are included with a given song. This is intentional and implemented in order to encourage sharing - if you want to pin/download an individual file you must pin/download the entire song.</p>
+  <h2>## downloading</h2>
+  <p>By downloading a song, you are automatically also pinning it to your local ipfs repository. This is intentional and implemented to encourage sharing.</p>
+  <p>When you download a song, you download all the included files along with it. The downloaded data is stored in the DOWNLOAD_PATH specified in the settings. [see below]</p>
+  <h2>## settings</h2>
+  <p>Settings can be modified by clicking on the tray icon and choosing the Settings option. Settings can also be modified directly by editing the settings.json file located in:</p>
+  ```
+  linux
+  macos
+  windows
+  ```
+
+  <p>The settings file consists of the following:</p>
+  ```
+  ```
+  <h2>## console commands</h2>
+  <p>Use these commands by executing them inside the ohm console:</p>
+  ```
+  ```
+  <br>
+  <a href='./index.html'>INDEX</a>
+  <a href='./about.html'>ABOUT</a>
+  <a href='https://github.com/jurelik/ohm/releases'>DOWNLOAD</a>
+  <a href='https://github.com/jurelik/ohm'>SOURCE</a>
+</body>
+</html>
