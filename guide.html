@@ -14,9 +14,11 @@
   <p>All songs must be uploaded to ohm as an mp3 file. This restriction is put in place to improve the user experience as streaming a lossless file can lead to buffering and large amounts of bandwidth usage. If the artist wants to include a lossless version of the song, they can do so freely by including a lossless copy in the files section of the song.</p>
   <p>When uploading more than one song at the same time, the upload is recognized by ohm as an album. In this case the album title, tags and description input fields are enabled and must be provided. Albums can be distinguished from songs by the <svg height="11" viewBox="-100 -100 200 200" width="11" xmlns="http://www.w3.org/2000/svg" transform="translate(0,1)"><g fill="none"><path d="m-75 75h105v-120h-90c-8.285 0-15 6.716-15 15zm150-150h-90c-8.285 0-15 6.716-15 15v15m60 90h45v-120" stroke="#eee" stroke-linecap="round" stroke-linejoin="round" stroke-width="20"/></g></svg> icon next to the title.</p>
   <p>Files that an artist includes with a song can be of three different types:</p>
-  <p>original - an original file with no previous copyright owners, e.g. original sounds, stems, project files, etc. All filetypes are allowed. </p>
-  <p>internal - a reference to a file already uploaded to ohm in a different song. An internal file can be referenced by its id.</p>
-  <p>external - an unoriginal file with a CC license. Attribution must be provided as required by the license holder.</p>
+  <pre>
+  original - an original file with no previous copyright owners, e.g. original sounds, stems, project files, etc. All filetypes are allowed.
+  internal - a reference to a file already uploaded to ohm in a different song. An internal file can be referenced by its id.
+  external - an unoriginal file with a CC license. Attribution must be provided as required by the license holder.
+  </pre>
   <h2>## pinning</h2>
   <p>By pinning a song, you are making a local copy of the song and all of its included files in your ipfs repository. This means that your client is now sharing this data with the rest of the network.</p>
   <p>When you pin a song, you are not downloading it in a traditional sense. No listenable files are downloaded to your disk, ifps only stores the data in packets that it can then share across the network with other nodes.</p>
@@ -26,19 +28,32 @@
   <p>When you download a song, you download all the included files along with it. The downloaded data is stored in the DOWNLOAD_PATH specified in the settings. [see below]</p>
   <h2>## settings</h2>
   <p>Settings can be modified by clicking on the tray icon and choosing the Settings option. Settings can also be modified directly by editing the settings.json file located in:</p>
-  ```
-  linux
-  macos
-  windows
-  ```
-
+  <pre>
+    linux - $XDG_CONFIG_HOME or ~/.config/ohm
+    macos - ~/Library/Application Support/ohm
+    windows - %APPDATA%\ohm
+  </pre>
   <p>The settings file consists of the following:</p>
-  ```
-  ```
+  <pre>
+    OHM_SERVER - url of the central server ohm is connecting to [default is 'api.ohm.rip']
+    DOWNLOAD_PATH - download path [default is '~/Documents/ohm']
+    OPEN_DEV - open devtools on open [default is 'false', can be set to 'true']
+    WIDTH - width of ohm window on open, changes when resizing [default is '640']
+    HEIGHT - height of ohm window on open, changes when resizing [default is '360']
+    FRAMELESS - toggle frameless window, only applicable on windows and linux [default is 'false', can be set to 'true']
+    OS_THEME - changes tray icon color manually, only applicable on windows and linux [default is 'system', can be set to 'dark' or 'light']
+    IPFS_PROTOCOL - protocol used to interact with an ipfs daemon [default is 'http']
+    IPFS_HOST - ipfs daemon IP [default is 'localhost']
+    IPFS_PORT - ipfs daemon API port [default is '5001']
+    IPFS_PATH - ipfs daemon API path [default is 'api/v0']
+  </pre>
   <h2>## console commands</h2>
   <p>Use these commands by executing them inside the ohm console:</p>
-  ```
-  ```
+  <pre>
+    app.changePassword(old: string, new: string)
+    app.changeLocation(location: string)
+    app.changeBio(bio: string)
+  </pre>
   <br>
   <a href='./index.html'>INDEX</a>
   <a href='./about.html'>ABOUT</a>
