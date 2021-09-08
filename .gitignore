@@ -1,2 +1,6 @@
 tags
 tags.lock
+tags.temp
+*.swp
+*.tmp
+.DS_Store
