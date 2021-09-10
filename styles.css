@@ -21,14 +21,6 @@ html {
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'InputMono';
-  font-size: 12px;
-  color: #eee;
-  margin: 50px;
-  background-color: #222;
-}
-
 h2 {
   font-size: 14px;
   font-weight: bold;
@@ -69,3 +61,11 @@ comment {
   font-size: 10px;
 }
 
+body {
+  font-family: 'InputMono';
+  font-size: 12px;
+  color: #eee;
+  margin: 50px;
+  background-color: #222;
+  visibility: visible;
+}
