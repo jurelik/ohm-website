@@ -35,22 +35,37 @@ h2 {
 }
 
 a {
-  color: #37a;
+  color: #3a6faf;
 }
 
 a:visited {
-  color: #758
+  color: #786691;
 }
 
 pre {
   padding: 10px;
   margin: 0 20px;
   border-radius: 5px;
-  background-color: #2a2a2a;
+  background-color: #282828;
   white-space: pre-wrap;
+}
+
+img {
+  width: 700px;
+  max-width: 100%;
+  height: auto;
+}
+
+comment {
+  color: #888;
 }
 
 .important {
   font-weight: bold;
   margin-top: 20px;
 }
+
+.credits {
+  font-size: 10px;
+}
+

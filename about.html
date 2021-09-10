@@ -12,17 +12,16 @@
   <p>The components, techniques and processes involved in making a musical work should be made available for others to improve and expand on. Knowledge needs to be shared in order to advance any given discipline and music is not an exception.</p>
   <h2>## how does ohm work</h2>
   <p>Every ohm client is also an ipfs node connected to the public ipfs network [<a href='https://docs.ipfs.io/concepts/what-is-ipfs/'>what is ipfs</a>]. When an artist uploads a song to ohm, they are given the option to include files of their choosing to share with the community. Stems, sounds, project files or any other files can be included - all filetypes are allowed.</p>
-  <p>In the process of uploading, a local copy of the song & files is created on the local machine's ipfs repository and the relevant CIDs [<a href='https://docs.ipfs.io/concepts/content-addressing/'>what is a CID</a>] are sent to a central server. The server stores the CIDs and the metadata in a database and, if configured as such, also pins [<a href='https://docs.ipfs.io/concepts/persistence/'>what is pinning</a>] the song & files for a set amount of time. (see below for explanation on why this is done). After a successful upload, any other ohm client can now listen to, pin or download the song and its relevant files as long as at least one node has the content pinned.</p>
-
+  <p>In the process of uploading, a local copy of the song & files is created on the local machine's ipfs repository and the relevant CIDs [<a href='https://docs.ipfs.io/concepts/content-addressing/'>what is a CID</a>] are sent to a central server. The server stores the CIDs and the metadata in a database and, if configured as such, also pins [<a href='https://docs.ipfs.io/concepts/persistence/'>what is pinning</a>] the song & files for a set amount of time. [see below for explanation on why this is done]. After a successful upload, any other ohm client can now listen to, pin or download the song and its relevant files as long as at least one node has the content pinned.</p>
+  <p class='important'>**DO NOT INFRINGE ON THE COPYRIGHT OF OTHERS, UPLOAD ONLY ORIGINAL CONTENT OR CONTENT LICENSED UNDER A CREATIVE COMMONS LICENSE.**</p>
   <h2>## is ohm decentralized</h2>
   <p>Yes and no. A central server/database is required to store accounts, CIDs and other metadata. Anybody can set up an <a href='https://github.com/jurelik/ohm-be'>ohm server</a> though and build a separate community if they'd like [think IRC].</p>
   <p>To enhance the user experience, songs & files uploaded to an ohm server can be stored in the server's ipfs repository if the server op chooses to do so. The default server [api.ohm.rip], for example, does this and has a 10Gb limit at which point an automated cron job will start unpining the oldest uploads.</p>
-
   <p>This mechanic is implemented due to how ipfs works. If an artist uploads a song to ipfs and then shuts down their ipfs node, the file won't be reachable by anybody else. If the song, however, is stored on the ohm server node when uploading, this guarantees that the song will be reachable at least up until the server decides to unpin it.</p>
-
   <p>Other than that everything else is decentralized and peer-to-peer. Content is only available as long as atleast one ipfs node has it pinned, which means ohm is highly reliant on an active community to keep content available for one another.</p>
   <br>
   <a href='./index.html'>INDEX</a>
+  <a href='./about.html'>ABOUT</a>
   <a href='./guide.html'>GUIDE</a>
   <a href='https://github.com/jurelik/ohm/releases'>DOWNLOAD</a>
   <a href='https://github.com/jurelik/ohm'>SOURCE</a>
