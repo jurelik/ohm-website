@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="jurelik">
+  <meta name='description' content='A platform for open source music.'/>
+  <meta name='keywords' content='open source, music, ipfs'/>
+  <title>ohm::blog</title>
+  <link rel="preload" href="../assets/fonts/InputMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/InputMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+</head>
+<body>
+  <a href='../index.html'><svg version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="-105 -105 210 210"><path fill="#CCC" stroke="#CCC" stroke-width="10" stroke-linecap="square" d="M-67.5-37.5h0v75h15v-75h-15m30-30h0v105h15v-105h-15m30 30h15v75h-15v-75m30 0h15v105h-15v-105m30 0h15v75h-15v-75m-60-30h75v15h-75v-15m-60 120h75v15h-75v-15m120 0h0v15h15v-15h-15m-120-120h0v15h15v-15h-15"/></svg></a>
+  <h2>## GUIDE: remote ohm node on a Raspberry Pi</h2>
+  <p>This is a step by step guide for setting up a remote IPFS node on a Raspberry Pi running a headless version of the Raspberry Pi OS. While the guide is specific to the Raspberry Pi and the Raspberry Pi OS, the concepts and the steps can be applied to a different OS.</p>
+  <p>Running a remote IPFS node is very beneficial to the ohm network as this means that your pinned content is reachable at all times, even when you are not actively running ohm on your personal computer. Ohm (being an electron app) can also be quite resource heavy on your computer, so only running it when you're exploring new content or interacting with the community is the way to go if you don't own a high-end workstation or just prefer to keep background processing to a minimum.</p>
+  <h3>### INDEX</h3>
+  <ul>
+    <li><a href="#setting-up">setting up the Raspberry Pi</a></li>
+    <li><a href="#connecting">connecting to the Raspberry Pi</a></li>
+    <li><a href="#installing-ipfs">installing IPFS</a></li>
+    <li><a href="#configuring-ipfs">configuring IPFS to work with ohm</a></li>
+    <li><a href="#running-ohm">running ohm with the remote node</a></li>
+    <li><a href="#automation">automation and process management</a></li>
+    <li><a href="#closing-remarks">closing remarks</a></li>
+  </ul>
+  <h3 id="setting-up">### setting up the Raspberry Pi</h3>
+  <p>Download the [<a href= "https://www.raspberrypi.com/software/">Raspberry Pi Imager Software</a>] or manually download the latest version of Raspberry Pi OS [<a href="https://www.raspberrypi.com/software/operating-systems/">here</a>]. It is recommended to use Raspberry Pi OS Lite which is a headless version of the OS. This means that the OS comes without a desktop environment, which in turn saves resources needed for running an IPFS node.</p>
+  <p>After the download is complete, the image needs to be written to a MicroSD card for the Raspberry Pi to read. If you installed the Raspberry Pi Imager, you can choose the desired Raspberry Pi OS and the location of the MicroSD and let the software do the rest. If, however, you chose to install manually you will need to follow a [<a href="https://www.raspberrypi.com/documentation/computers/getting-started.html#downloading-an-image">guide</a>] specific to your OS on how to mount the image on your MicroSD card.
+  <p>If you opted for Raspberry Pi OS Lite (headless) and don't have the means of connecting the Raspberry Pi to a monitor & keyboard you will need to enable ssh before inserting the MicroSD card into the Raspberry Pi. To do this, navigate to the boot directory of the MicroSD card:</p>
+  <pre>cd /Volumes/boot</pre>
+  <p>And create an empty ssh file:</p>
+  <pre>touch ssh</pre>
+  <p>If your Raspberry Pi doesn't have an ethernet connector or if you'd prefer using Wi-Fi, you will also need to create a <code>wpa_supplicant.conf</code> file with the following contents:</p>
+  <pre>
+country=GB # Your 2-digit country code - find yours [<a href="https://web.archive.org/web/20201114164311/https://www.arubanetworks.com/techdocs/InstantWenger_Mobile/Advanced/Content/Instant%20User%20Guide%20-%20volumes/Country_Codes_List.htm">here</a>]
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+network={
+    ssid="YOUR_NETWORK_NAME"
+    psk="YOUR_PASSWORD"
+    key_mgmt=WPA-PSK
+}</pre>
+  <p>When all of the above is done, you're ready to insert the MicroSD, connect the ethernet cable (if applicable) and power up your Raspberry Pi.</p>
+  <h3 id="connecting">### connecting to the Raspberry Pi</h3>
+  <comment>You can skip this step if you are using a monitor & keyboard to use your Raspberry Pi.</comment>
+  <p>The fastest way to connect to your Raspberry Pi is by using the <code>raspberrypi.local</code> hostname as the ssh target:</p>
+  <pre>ssh pi@raspberrypi.local</pre>
+  <p>Follow the prompts and enter <code>raspberry</code> as the password when prompted. (It is recommended to change your password - follow the instructions on the screen to do so.)</p>
+  <h3 id="installing-ipfs">### installing IPFS</h3>
+  <comment>This section is an almost word for word copy of the official IPFS [<a href="https://docs.ipfs.io/install/command-line/#linux">linux installation guide</a>].</comment>
+  <p>Find the latest IPFS binary [<a href="https://dist.ipfs.io/#go-ipfs">here</a>] (by default we are looking for the Linux ARM binary) and copy the link to your clipboard. Navigate back to your Raspberry Pi terminal and download the IPFS binary with <code>wget</code>:</p>
+  <pre>wget https://dist.ipfs.io/go-ipfs/v0.10.0/go-ipfs_v0.10.0_linux-arm.tar.gz</pre>
+  <p>Unzip the file with:</p>
+  <pre>tar -xvzf go-ipfs_v0.10.0_linux-arm.tar.gz</pre>
+  <p>Move to the go-ipfs folder and run the install script:</p>
+  <pre>cd go-ipfs
+sudo bash install.sh
+
+> Moved ./ipfs to /usr/local/bin</pre>
+  <p>Test that IPFS has installed correctly:</p>
+  <pre>ipfs --version
+
+> ipfs version 0.10.0</pre>
+  <h3 id="configuring-ipfs">### configuring IPFS to work with ohm</h3>
+  <p>First, make sure to change the default IPFS repo to <code>.ohm-ipfs</code>. To do this, append the <code>.bashrc</code> with <code>export IPFS_PATH=~/.ohm-ipfs</code>. Raspberry Pi OS comes pre-installed with vi so follow these steps if you are unfamiliar with editing text in a terminal:</p>
+  <pre>
+cd                                  <comment>//Navigate to home folder</comment>
+vi .bashrc                          <comment>//Open .bashrc file with vi</comment>
+
+<comment>//You have now entered the vi text-editor</comment>
+
+press Shift + G                     <comment>//Navigate to bottom of file</comment>
+press o                             <comment>//Create a new line and enter INSERT mode</comment>
+type "export IPFS_PATH=~/.ohm-ipfs" <comment>//Without quotes</comment>
+press ESC                           <comment>//To exit INSERT mode</comment>
+type ":wq" and press ENTER          <comment>//Without quotes</comment>
+
+<comment>//You have now left the vi text-editor</comment>
+
+sudo reboot                         <comment>//Restart the Raspberry Pi</comment></pre>
+  <p>If you don't have a monitor & keyboard, you will need to ssh into the Raspberry Pi again after it reboots (give it a minute).</p>
+  <p>After the Raspberry Pi reboots, we can initialize the IPFS repo with the following command:</p>
+  <pre>ipfs init --profile flatfs <comment>//We are using the flatfs datastore as it is less memory-heavy and better at working with a small storage. Feel free to use badgerfs if you are an advanced user.</comment></pre>
+  <p>Before running the IPFS daemon, you will need to edit the ipfs config. First, find the IP address of your Raspberry Pi:</p>
+  <pre>hostname -I
+
+> 192.168.1.23 fdaa:bbcc:ddee:0:caba:8de3:64e3:5dfc </pre>
+  <p>Copy the number value from the output above into the following commands, which will allow ohm to connect to the remote node:</p>
+  <pre>
+ipfs config Addresses.API /ip4/192.168.1.23/tcp/5001
+ipfs config Addresses.Gateway /ip4/192.168.1.23/tcp/8080</pre>
+  <p></p>
+  <p>You might also want to consider changing the max storage size of the datastore if storage is a concern (by default the size is set to 10GB):</p>
+  <pre>ipfs config Datastore.StorageMax 10GB</pre>
+  <h3 id="running-ohm">### running ohm with the remote node</h3>
+  <p>To start the remote node, run the following command:</p>
+  <pre>
+<comment>//The --enable-gc flag enables garbage collection which prevents the datastore from going above the Datastore.StorageMax limit.</comment>
+<comment>//The --routing=dhtclient flag stops the ipfs daemon from also being a DHT server, saving bandwidth usage.</comment>
+<comment>//Omit the flags above at your own discretion.</comment>
+
+ipfs daemon --enable-gc --routing=dhtclient</pre>
+  <p>Open ohm, navigate to the settings page and change the <code>IPFS_API_HOST</code> value to the remote node IP address <code>192.168.1.23</code>. Click save and restart ohm by quiting it entirely. If all went well, ohm will start without a hiccup when you next launch it. If you have devtools enabled, you will also notice that the <code>Initiating IPFS daemon..</code> and <code>IPFS daemon initiated.</code> messages have changed to <code>Connecting to remote IPFS daemon.</code> and <code>Connection to IPFS daemon established.</code> when starting up ohm.</p>
+  <p>Congratulations, you are now running a remote ohm node.</p>
+  <h3 id="automation">### automation and process management</h3>
+  <p>There are many ways of managing processes in a linux environment, but this guide will focus on working with <code>systemd</code> as it comes preinstalled with Raspberry Pi OS. A honorable mention that is currently being used on the default central ohm server (api.ohm.rip) is [<a href="https://pm2.keymetrics.io/">PM2</a>], which is a great alternative that is more visual but needs Node.js to run. You can skip this section altogether but it is strongly recommended that you set up some sort of automation for managing the IPFS process.</p>
+  <p>First, create a .service file for the process in <code>/etc/systemd/system</code>:</p>
+  <pre>
+cd /etc/systemd/system
+sudo vi ohm-node.service
+
+<comment>//You have now entered the vi text-editor</comment>
+
+press i                         <comment>//Enter INSERT mode</comment>
+
+paste the following:
+<comment>//Copy below this line</comment>
+[Unit]
+Description=Remote ohm node
+After=network.target
+
+[Service]
+ExecStart=ipfs daemon --enable-gc --routing=dhtclient
+Restart=always
+WorkingDirectory=/home/pi
+User=pi
+Environment=IPFS_PATH=~/.ohm-ipfs
+MemoryHigh=700M
+MemoryMax=800M
+
+[Install]
+WantedBy=multi-user.target
+<comment>//Copy above this line</comment>
+
+<comment>//Please note that you should change the MemoryHigh and MemoryMax values according to the amount of RAM on your Raspberry Pi. The settings above are safe estimates for a Raspberry Pi with 1GB RAM</comment>
+
+press ESC                       <comment>//To exit INSERT mode</comment>
+type ":wq" and press ENTER      <comment>//Without quotes</comment>
+
+<comment>//You have now left the vi text-editor</comment>
+
+cd
+sudo systemctl start ohm-node   <comment>//Start the ohm-node service</comment>
+systemctl status ohm-node       <comment>//Check if the service is active</comment>
+sudo systemctl enable ohm-node  <comment>//OPTIONAL: If you'd like to start ohm-node when your Raspberry Pi boots up</comment></pre>
+  <h3 id="closing-remarks">### closing remarks</h3>
+  <p>Please be aware that running an ohm node without pinning any content is not much different than not running an ohm node at all. So please make sure to pin the content you like as well and by doing so, support and grow the ohm network.</p>
+
+  <a href='../about.html'>ABOUT</a>
+  <a href='../guide.html'>GUIDE</a>
+  <a href='https://github.com/jurelik/ohm/releases'>DOWNLOAD</a>
+  <a href='https://github.com/jurelik/ohm'>SOURCE</a>
+  <a href='./index.html'>BLOG</a>
+  <a href='https://ko-fi.com/ohmplatform'>DONATE</a>
+</body>
+</html>
