@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>ohm::blog</title>
+    <link>https://ohm.rip/blog</link>
+    <description>The official ohm blog.</description>
+    <image>
+      <title>ohm::blog</title>
+      <link>https://ohm.rip/blog</link>
+      <url>https://ohm.rip/assets/img/rss.png</url>
+      <description>The official ohm blog.</description>
+    </image>
+    <item>
+      <title>GUIDE: remote ohm node on a Raspberry Pi</title>
+      <link>https://ohm.rip/blog/remote_node.html</link>
+      <guid>https://ohm.rip/blog/remote_node.html</guid>
+      <category>Guides</category>
+      <pubDate>Sat, 30 Oct 2021 00:00:00 GMT</pubDate>
+      <description>This is a step by step guide for setting up a remote IPFS node on a Raspberry Pi running a headless version of the Raspberry Pi OS.</description>
+    </item>
+    <item>
+      <title>v0.0.3-alpha release notes</title>
+      <link>https://ohm.rip/blog/v0_0_3.html</link>
+      <category>Release notes</category>
+      <guid>https://ohm.rip/blog/v0_0_3.html</guid>
+      <pubDate>Mon, 11 Oct 2021 00:00:00 GMT</pubDate>
+      <description>The v0.0.3-alpha release brings some minor bug fixes as well as some bigger updates.</description>
+    </item>
+  </channel>
+</rss>

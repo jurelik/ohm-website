@@ -72,6 +72,7 @@ img.gif {
 }
 
 ul {
+  margin-top: 0;
   padding: 0;
   list-style-position: inside;
 }
@@ -99,4 +100,14 @@ date {
 
 .credits {
   font-size: 10px;
+}
+
+#rss {
+  display: flex;
+  align-items: flex-end;
+  white-space: pre-wrap;
+}
+
+#rss a {
+  display: flex;
 }
