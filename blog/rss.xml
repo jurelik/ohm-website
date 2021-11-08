@@ -11,6 +11,14 @@
       <description>The official ohm blog.</description>
     </image>
     <item>
+      <title>v0.0.4-alpha release notes</title>
+      <link>https://ohm.rip/blog/v0_0_4.html</link>
+      <category>Release notes</category>
+      <guid>https://ohm.rip/blog/v0_0_4.html</guid>
+      <pubDate>Sat, 08 Nov 2021 00:00:00 GMT</pubDate>
+      <description>The v0.0.4-alpha release brings quality of life improvements as well as some minor bug fixes.</description>
+    </item>
+    <item>
       <title>GUIDE: remote ohm node on a Raspberry Pi</title>
       <link>https://ohm.rip/blog/remote_node.html</link>
       <guid>https://ohm.rip/blog/remote_node.html</guid>
