@@ -17,6 +17,16 @@
 </head>
 <body>
   <a href='./index.html'><svg version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="-105 -105 210 210"><path fill="#CCC" stroke="#CCC" stroke-width="10" stroke-linecap="square" d="M-67.5-37.5h0v75h15v-75h-15m30-30h0v105h15v-105h-15m30 30h15v75h-15v-75m30 0h15v105h-15v-105m30 0h15v75h-15v-75m-60-30h75v15h-75v-15m-60 120h75v15h-75v-15m120 0h0v15h15v-15h-15m-120-120h0v15h15v-15h-15"/></svg></a>
+  <h2>## INDEX</h2>
+  <ul>
+    <li><a href="#general">general</a></li>
+    <li><a href="#uploading">uploading</a></li>
+    <li><a href="#pinning">pinning</a></li>
+    <li><a href="#downloading">downloading</a></li>
+    <li><a href="#settings">settings</a></li>
+    <li><a href="#console-commands">console commands</a></li>
+    <li><a href="#themes">themes</a></li>
+  </ul>
   <h2 id="general">## general</h2>
   <p>By default, ohm opens without devtools displayed. If you'd like to get a closer look into the live logs and error debugging it is recommended to open the devtools when running ohm. You can open the devtools manually by using the keyboard shortcut Cmd+Option+I/Ctrl+Shift+I or through the menu bar. You can also set devtools to open automatically on launch by modifying settings. [<a href='#settings'>see below</a>]</p>
   <p>By default, ipfs will try and use uPnP as a port-forwarding solution if your router supports it. If not, you will need to open port 4001 to allow ipfs traffic. [<a href='https://docs.ipfs.io/how-to/nat-configuration/'>read more</a>]</p>
@@ -37,7 +47,7 @@ external: an unoriginal file with a CC license. Attribution must be provided as 
   <p>By downloading a song, you are automatically also pinning it to your local ipfs repository. This is intentional and implemented to encourage sharing.</p>
   <p>When you download a song, you download all the included files along with it. The downloaded data is stored in the DOWNLOAD_PATH specified in the settings. [<a href='#settings'>see below</a>]</p>
   <h2 id="settings">## settings</h2>
-  <p>Settings can be modified by clicking on the tray icon and choosing the Settings option. Settings can also be modified directly by editing the settings.json file located in:</p>
+  <p>Settings can be modified by clicking on the tray icon and choosing the Settings option. Settings can also be modified directly by editing the <code>settings.json</code> file located in:</p>
   <pre>
 linux: $XDG_CONFIG_HOME or ~/.config/ohm
 macos: ~/Library/Application Support/ohm
@@ -50,8 +60,8 @@ windows: %APPDATA%\ohm</pre>
   "OPEN_DEV: "false",                   <comment>// open devtools on run</comment>
   "WIDTH": "640",                       <comment>// width of ohm window, changes when resizing</comment>
   "HEIGHT": "360",                      <comment>// height of ohm window, changes when resizing</comment>
-  "FRAMELESS": "false",                 <comment>// toggle frameless window [only linux and windows]</comment>
-  "OS_THEME": "system",                 <comment>// force tray icon color [only linux and windows]</comment>
+  "FRAMELESS": "false",                 <comment>// toggle frameless window (only linux and windows)</comment>
+  "OS_THEME": "system",                 <comment>// force tray icon color (only linux and windows)</comment>
   "IPFS_PROTOCOL": "http",              <comment>// protocol used to interact with the ipfs daemon</comment>
   "IPFS_HOST": "localhost",             <comment>// ipfs daemon IP</comment>
   "IPFS_PORT": "5001",                  <comment>// ipfs daemon API port</comment>
@@ -62,7 +72,28 @@ windows: %APPDATA%\ohm</pre>
   <pre>
 app.changePassword(old: string, new: string)
 app.changeLocation(location: string)
-app.changeBio(bio: string)</pre>
+app.changeBio(bio: string)
+app.logout()</pre>
+  <h2 id="themes">## themes</h2>
+  <p>The theme of ohm can be changed by creating/modifying a theme.json file located in:</p>
+  <pre>
+linux: $XDG_CONFIG_HOME or ~/.config/ohm
+macos: ~/Library/Application Support/ohm
+windows: %APPDATA%\ohm</pre>
+  <p>The <code>theme.json</code> file has the following structure (the values below are the defaults):</p>
+  <pre>
+{
+  "--f-highest": "#eee",
+  "--f-high": "#ccc",
+  "--f-mid": "#bbb",
+  "--f-low": "#888",
+  "--b-high": "#444",
+  "--b-mid": "#333",
+  "--b-low": "#222",
+  "--b-lowest": "#111",
+  "--overlay": "rgba(238, 238, 238, 0.05)"
+}</pre>
+  <p>The colors can be modified by changing the hex/rgba values to any other valid CSS color value.</p>
   <br>
   <a href='./about.html'>ABOUT</a>
   <a href='./guide.html'>GUIDE</a>
