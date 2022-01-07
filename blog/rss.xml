@@ -11,6 +11,14 @@
       <description>The official ohm blog.</description>
     </image>
     <item>
+      <title>v0.0.5-alpha release notes</title>
+      <link>https://ohm.rip/blog/v0_0_5.html</link>
+      <category>Release notes</category>
+      <guid>https://ohm.rip/blog/v0_0_5.html</guid>
+      <pubDate>Fri, 07 Jan 2022 00:00:00 GMT</pubDate>
+      <description>The v0.0.5-alpha release brings major changes to the MFS structure of uploaded files by introducing a new .ohm file type. Custom theme functionality has been added as well.</description>
+    </item>
+    <item>
       <title>v0.0.4-alpha release notes</title>
       <link>https://ohm.rip/blog/v0_0_4.html</link>
       <category>Release notes</category>

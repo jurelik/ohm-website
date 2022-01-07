@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="jurelik">
+  <meta name='description' content='The official ohm blog.'/>
+  <meta name='keywords' content='open source, music, ipfs'/>
+  <title>ohm::blog</title>
+  <link rel="preload" href="../assets/fonts/InputMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="../assets/fonts/InputMono-Bold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+</head>
+<body>
+  <a href='../index.html'><svg version="1.2" baseProfile="tiny" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="-105 -105 210 210"><path fill="#CCC" stroke="#CCC" stroke-width="10" stroke-linecap="square" d="M-67.5-37.5h0v75h15v-75h-15m30-30h0v105h15v-105h-15m30 30h15v75h-15v-75m30 0h15v105h-15v-105m30 0h15v75h-15v-75m-60-30h75v15h-75v-15m-60 120h75v15h-75v-15m120 0h0v15h15v-15h-15m-120-120h0v15h15v-15h-15"/></svg></a>
+  <h2>## v0.0.5-alpha release notes</h2>
+  <p>The v0.0.5-alpha release brings major changes to the MFS structure of uploaded files by introducing a new <code>.ohm</code> file type. Other minor bug fixes and new features are listed <a href="https://github.com/jurelik/ohm/issues/6">here</a>.</p>
+  <h3>### .ohm file</h3>
+  <p>A <code>.ohm</code> file is now included in the root folder of every song/album. The file includes information about the artists whose work is included in the uploaded folder as well as the upload state. The ohm client treats a <code>.ohm</code> file like an <code>.ous</code> file and is therefore able to recunstruct an upload.</p>
+  <p>This functionality was included so that anyone with a local copy of a given song/album will be able to reproduce the upload in the future if needed.</p>
+  <h3>### custom themes</h3>
+  <p>Custom user theme functionality has now been added to ohm. The theme of ohm can be changed by creating/modifying a <code>theme.json</code> file located in:</p>
+  <pre>
+linux: $XDG_CONFIG_HOME or ~/.config/ohm
+macos: ~/Library/Application Support/ohm
+windows: %APPDATA%\ohm</pre>
+  <p>The <code>theme.json</code> file has the following structure (the values below are the defaults):</p>
+  <pre>
+{
+  "--f-highest": "#eee",
+  "--f-high": "#ccc",
+  "--f-mid": "#bbb",
+  "--f-low": "#888",
+  "--b-high": "#444",
+  "--b-mid": "#333",
+  "--b-low": "#222",
+  "--b-lowest": "#111",
+  "--overlay": "rgba(238, 238, 238, 0.05)"
+}</pre>
+  <p>The colors can be modified by changing the hex/rgba values to any other valid CSS color value. Here is an example of a custom theme inspired by <a href="https://github.com/morhetz/gruvbox">gruvbox</a> with all the custom values provided below:</p>
+  <img src="../assets/img/theme.png" alt="theme" class="png" style="width:500px"/>
+  <pre>
+{
+  "--f-highest": "#fabd2f",
+  "--f-high": "#d79921",
+  "--f-mid": "#fbf1c7",
+  "--f-low": "#ebdbb2",
+  "--b-high": "#a89984",
+  "--b-mid": "#b57614",
+  "--b-low": "#282828",
+  "--b-lowest": "#1d2021",
+  "--overlay": "rgba(238, 238, 238, 0.05)"
+}</pre>
+  <br>
+  <a href='../about.html'>ABOUT</a>
+  <a href='../guide.html'>GUIDE</a>
+  <a href='https://github.com/jurelik/ohm/releases'>DOWNLOAD</a>
+  <a href='https://github.com/jurelik/ohm'>SOURCE</a>
+  <a href='./index.html'>BLOG</a>
+  <a href='https://ko-fi.com/ohmplatform'>DONATE</a>
+</body>
+</html>
