@@ -95,7 +95,8 @@ sudo reboot                         <comment>//Restart the Raspberry Pi</comment
   <pre>
 ipfs config Addresses.API /ip4/192.168.1.23/tcp/5001
 ipfs config Addresses.Gateway /ip4/192.168.1.23/tcp/8080</pre>
-  <p></p>
+  <p>By default, IPFS will try and use uPnP to open the ports on your router. The various uPnP implementations will vary across different routers and some of those might be dodgy and/or problematic. If, for whatever reason, you would prefer not to use uPnP you can turn off automatic NAT port forwarding with the following command. Please note that this will require you to manually forward the port 4001 on your router for both TCP & UDP.</p>
+  <pre>ipfs config --json 'Swarm.DisableNatPortMap' true</pre>
   <p>You might also want to consider changing the max storage size of the datastore if storage is a concern (by default the size is set to 10GB):</p>
   <pre>ipfs config Datastore.StorageMax 10GB</pre>
   <h3 id="running-ohm">### running ohm with the remote node</h3>
