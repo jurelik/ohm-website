@@ -11,6 +11,14 @@
       <description>The official ohm blog.</description>
     </image>
     <item>
+      <title>v0.0.6-alpha release notes</title>
+      <link>https://ohm.rip/blog/v0_0_6.html</link>
+      <category>Release notes</category>
+      <guid>https://ohm.rip/blog/v0_0_6.html</guid>
+      <pubDate>Thu, 03 Feb 2022 00:00:00 GMT</pubDate>
+      <description>The v0.0.6-alpha release is mostly a maintenance update. Packages and dependencies have been updated and minor bugs fixed. Registration is now open to the public.</description>
+    </item>
+    <item>
       <title>v0.0.5-alpha release notes</title>
       <link>https://ohm.rip/blog/v0_0_5.html</link>
       <category>Release notes</category>
